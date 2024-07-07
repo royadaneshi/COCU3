@@ -1495,6 +1495,7 @@ def get_superclass_list(dataset):
 
 
 def get_subclass_dataset(P, dataset, classes, count=-1):
+    print("given dataset:",len(dataset))
     if not isinstance(classes, list):
         classes = [classes]
 

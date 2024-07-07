@@ -70,6 +70,7 @@ if P.dataset=='cub-birds' or P.dataset=='ISIC2018' or P.dataset=='high-variation
     else:
         test_set = get_subclass_dataset(P, test_set, classes=[0])
 else:
+    print("train_set in train.py:", len(train_set))
     train_set = get_subclass_dataset(P, train_set, classes=normal_labels, count=P.main_count)
     test_set = get_subclass_dataset(P, test_set, classes=normal_labels)
         
