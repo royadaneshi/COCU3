@@ -131,7 +131,6 @@ def get_scores(P, feats_dict, ood_score):
 
 def get_features(P, data_name, model, loader, interp=False, prefix='',
                  simclr_aug=None, sample_num=1, layers=('simclr', 'shift')):
-
     if not isinstance(layers, (list, tuple)):
         layers = [layers]
 
@@ -158,7 +157,6 @@ def get_features(P, data_name, model, loader, interp=False, prefix='',
 
 def _get_features(P, model, loader, interp=False, imagenet=False, simclr_aug=None,
                   sample_num=1, layers=('simclr', 'shift')):
-
     if not isinstance(layers, (list, tuple)):
         layers = [layers]
 
@@ -171,8 +169,10 @@ def _get_features(P, model, loader, interp=False, imagenet=False, simclr_aug=Non
     # compute features in full dataset
     model.eval()
     feats_all = {layer: [] for layer in layers}  # initialize: empty list
-    logging.info("layersssssssssssss:", layers)
+    logging.info("layersssssssssssss:")
     logging.info("feats_all:", feats_all)
+    logging.info(
+        "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1:")
 
     for i, (x, _) in enumerate(loader):
         if interp:
@@ -192,7 +192,7 @@ def _get_features(P, model, loader, interp=False, imagenet=False, simclr_aug=Non
             if P.K_shift > 1:
                 x_t = torch.cat([P.shift_trans(hflip(x), k) for k in range(P.K_shift)])
             else:
-                x_t = x # No shifting: SimCLR
+                x_t = x  # No shifting: SimCLR
             x_t = simclr_aug(x_t)
 
             # compute augmented features
@@ -215,13 +215,13 @@ def _get_features(P, model, loader, interp=False, imagenet=False, simclr_aug=Non
             else:
                 feats_batch[key] = torch.stack(val, dim=1)  # (B, T, d)
 
+        logging.info("feats_batch:###########################", feats_batch)
         # add features in full dataset
         for layer in layers:
-            logging.debug("feats_all[layer]beforeeeeeeeeee:", feats_all[layer])
+            logging.info("feats_all[layer]beforeeeeeeeeee:", feats_all[layer])
 
             feats_all[layer] += [feats_batch[layer]]
-            logging.debug("feats_all[layer]afterrrrrrrrrrrr", feats_all[layer])
-
+            logging.info("feats_all[layer]afterrrrrrrrrrrr", feats_all[layer])
 
     # concatenate features in full dataset
     logging.info("feats_alllllllllll", feats_all)
@@ -246,4 +246,3 @@ def print_score(data_name, scores):
     print('{:18s} '.format(data_name) +
           '{:.4f} +- {:.4f}    '.format(np.mean(scores), np.std(scores)) +
           '    '.join(['q{:d}: {:.4f}'.format(i * 10, quantile[i]) for i in range(11)]))
-
