@@ -616,22 +616,29 @@ def get_dataset(P, dataset, test_only=False, image_size=(32, 32, 3), download=Fa
         else:
             train_set = TumorDetection(transform=transform, train=True)
             train_set2 = TumorDetection2(transform=transform, train=True)
-#############################33333
+            #############################33333
             dataset_length2 = len(train_set2)
             sample_image2, _ = train_set2[0]
             sample_image_shape2 = sample_image2.size  # This is (256, 256)
-            print("here2 tumor: dataset_length2", dataset_length2, " shape",sample_image_shape2," type", type(train_set2))
+            print("here2 tumor: dataset_length2", dataset_length2, " shape", sample_image_shape2)
             dataset_length = len(train_set)
             sample_image, _ = train_set[0]
             sample_image_shape = sample_image.size  # This is (256, 256)
-            print("here2 chest: length", dataset_length," shape:", sample_image_shape, " type: ",type(train_set))
+            print("here2 chest: length", dataset_length, " shape:", sample_image_shape)
             #######################################################
-
 
         test_set = TumorDetection(transform=transform, train=False)
         test_set2 = TumorDetection2(transform=transform, train=False)
-        print("here3 tumor:", test_set2.shape(), test_set2.type())
-        print("here3 chest :", train_set.shape(), train_set.type())
+        #######################33333
+        dataset_length2 = len(test_set2)
+        sample_image2, _ = test_set2[0]
+        sample_image_shape2 = sample_image2.size  # This is (256, 256)
+        print("here3 tumor: dataset_length2", dataset_length2, " shape", sample_image_shape2)
+        dataset_length = len(test_set)
+        sample_image, _ = test_set[0]
+        sample_image_shape = sample_image.size  # This is (256, 256)
+        print("here3 chest: length", dataset_length, " shape:", sample_image_shape)
+        #######################################################
 
         print("train_set shapes: ", train_set[0][0].shape)
         print("test_set shapes: ", test_set[0][0].shape)
@@ -1173,7 +1180,7 @@ def get_dataset(P, dataset, test_only=False, image_size=(32, 32, 3), download=Fa
             tumor_detc_train_set = TumorDetection(transform=train_transform_cutpasted, train=True,
                                                   count=tumor_detection_cnt)
             tumor_detc_train_set2 = TumorDetection2(transform=train_transform_cutpasted, train=True,
-                                                  count=tumor_detection_cnt)
+                                                    count=tumor_detection_cnt)
             print("here4 tumor:", tumor_detc_train_set2.shape(), tumor_detc_train_set2.type())
             print("here4 chest :", tumor_detc_train_set.shape(), tumor_detc_train_set.type())
         else:
