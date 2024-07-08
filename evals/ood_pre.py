@@ -171,8 +171,8 @@ def _get_features(P, model, loader, interp=False, imagenet=False, simclr_aug=Non
     # compute features in full dataset
     model.eval()
     feats_all = {layer: [] for layer in layers}  # initialize: empty list
-    logging.info("layersssssssssssss:%s", layers)
-    logging.info("feats_all:%s", feats_all)
+    logging.debug("layersssssssssssss:%s", layers)
+    logging.debug("feats_all:%s", feats_all)
 
     for i, (x, _) in enumerate(loader):
         if interp:
@@ -217,14 +217,14 @@ def _get_features(P, model, loader, interp=False, imagenet=False, simclr_aug=Non
 
         # add features in full dataset
         for layer in layers:
-            logging.info("feats_all[layer]beforeeeeeeeeee:%s", feats_all[layer])
+            logging.debug("feats_all[layer]beforeeeeeeeeee:%s", feats_all[layer])
 
             feats_all[layer] += [feats_batch[layer]]
-            logging.info("feats_all[layer]afterrrrrrrrrrrr:%s", feats_all[layer])
+            logging.debug("feats_all[layer]afterrrrrrrrrrrr:%s", feats_all[layer])
 
 
     # concatenate features in full dataset
-    logging.info("feats_alllllllllll:%s", feats_all)
+    logging.info("feats_alllllllllll", feats_all)
 
     for key, val in feats_all.items():
         feats_all[key] = torch.cat(val, dim=0)  # (N, T, d)
