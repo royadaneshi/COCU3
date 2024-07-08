@@ -209,7 +209,6 @@ def _get_features(P, model, loader, interp=False, imagenet=False, simclr_aug=Non
                     feats_batch[layer] += [feats]  # (B, d) cpu tensor
 
         # concatenate features in one batch
-        logging.info("feats_alllllllllll:%s",feats_all)
         for key, val in feats_batch.items():
             if imagenet:
                 feats_batch[key] = torch.stack(val, dim=0)  # (B, T, d)
@@ -221,6 +220,8 @@ def _get_features(P, model, loader, interp=False, imagenet=False, simclr_aug=Non
             feats_all[layer] += [feats_batch[layer]]
 
     # concatenate features in full dataset
+    logging.info("feats_alllllllllll:%s", feats_all)
+
     for key, val in feats_all.items():
         feats_all[key] = torch.cat(val, dim=0)  # (N, T, d)
 
