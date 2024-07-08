@@ -30,7 +30,10 @@ elif P.mode in ['ood', 'ood_pre']:
     with torch.no_grad():
         print("evallllllllllllllllllllllllllll///////////////////////////////////")
         logging.debug("This is a debug message")
-        logging.debug("modelllllllll",model)
+        logging.info("modelllllllll",model)
+        logging.warning("This is a warning message")
+        logging.error("This is an error message")
+        logging.critical("This is a critical message")
         print("modellllllllllllllll", model)
         print("test_loader", test_loader)
         print(" ood_test_loader", ood_test_loader)
