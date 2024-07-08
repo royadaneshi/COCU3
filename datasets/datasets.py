@@ -170,9 +170,9 @@ def get_exposure_dataloader(P, batch_size=64, image_size=(224, 224, 3),
             transforms.RandomChoice(
                 [transforms.RandomApply(
                     [transforms.RandomAffine(90, translate=(0.15, 0.15), scale=(0.85, 1), shear=None)], p=0.6),
-                 transforms.RandomApply([transforms.RandomAffine(0, translate=None, scale=(0.5, 0.75), shear=30)],
-                                        p=0.6),
-                 transforms.RandomApply([transforms.AutoAugment()], p=0.9), ]),
+                    transforms.RandomApply([transforms.RandomAffine(0, translate=None, scale=(0.5, 0.75), shear=30)],
+                                           p=0.6),
+                    transforms.RandomApply([transforms.AutoAugment()], p=0.9), ]),
             transforms.RandomHorizontalFlip(),
             transforms.ToTensor()
         ])
@@ -1548,17 +1548,21 @@ def get_subclass_dataset(P, dataset, classes, count=-1):
 
     indices = []
     try:
+        print("try!!! ", len(dataset.targets))
         for idx, tgt in enumerate(dataset.targets):
             if tgt in classes:
                 indices.append(idx)
+                print("add# ",indices)
     except:
         # SVHN
+        print("except!!! ", len(dataset))
         for idx, (_, tgt) in enumerate(dataset):
             if tgt in classes:
                 indices.append(idx)
+                print("addd~~",indices)
 
     print("given dataset before subset:", len(dataset))
-    print("indices:",indices)
+    print("indices:", indices)
     dataset = Subset(dataset, indices)
     print("given dataset after subset ! :", len(dataset))
 
