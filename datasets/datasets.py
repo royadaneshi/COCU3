@@ -610,9 +610,19 @@ def get_dataset(P, dataset, test_only=False, image_size=(32, 32, 3), download=Fa
         ])
         if train_transform_cutpasted:
             train_set = TumorDetection(transform=train_transform_cutpasted, train=True)
+            train_set2 = TumorDetection2(transform=train_transform_cutpasted, train=True)
+            print("here1 tumor:", train_set2.shape(), train_set2.type())
+            print("here1 chest :", train_set.shape(), train_set.type())
         else:
             train_set = TumorDetection(transform=transform, train=True)
+            train_set2 = TumorDetection2(transform=transform, train=True)
+            print("here2 tumor:", train_set2.shape(), train_set2.type())
+            print("here2 chest :", train_set.shape(), train_set.type())
         test_set = TumorDetection(transform=transform, train=False)
+        test_set2 = TumorDetection2(transform=transform, train=False)
+        print("here3 tumor:", test_set2.shape(), test_set2.type())
+        print("here3 chest :", train_set.shape(), train_set.type())
+
         print("train_set shapes: ", train_set[0][0].shape)
         print("test_set shapes: ", test_set[0][0].shape)
     elif dataset == 'cifar10-versus-100':
@@ -1152,9 +1162,19 @@ def get_dataset(P, dataset, test_only=False, image_size=(32, 32, 3), download=Fa
             ])
             tumor_detc_train_set = TumorDetection(transform=train_transform_cutpasted, train=True,
                                                   count=tumor_detection_cnt)
+            tumor_detc_train_set2 = TumorDetection2(transform=train_transform_cutpasted, train=True,
+                                                  count=tumor_detection_cnt)
+            print("here4 tumor:", tumor_detc_train_set2.shape(), tumor_detc_train_set2.type())
+            print("here4 chest :", tumor_detc_train_set.shape(), tumor_detc_train_set.type())
         else:
             tumor_detc_train_set = TumorDetection(transform=transform, train=True, count=tumor_detection_cnt)
+            tumor_detc_train_set2 = TumorDetection2(transform=transform, train=True, count=tumor_detection_cnt)
+            print("here5 tumor:", tumor_detc_train_set2.shape(), tumor_detc_train_set2.type())
+            print("here5 chest :", tumor_detc_train_set.shape(), tumor_detc_train_set.type())
         tumor_detc_test_set = TumorDetection(transform=transform, train=False)
+        tumor_detc_test_set2 = TumorDetection2(transform=transform, train=False)
+        print("here6 tumor:", tumor_detc_test_set2.shape(), tumor_detc_test_set2.type())
+        print("here6 chest :", tumor_detc_test_set.shape(), tumor_detc_test_set.type())
 
         normal_files = sorted(glob('./brain_tumor_dataset/no/*'))
         test_normal = normal_files[:25]
@@ -1552,16 +1572,16 @@ def get_subclass_dataset(P, dataset, classes, count=-1):
         for idx, tgt in enumerate(dataset.targets):
             if tgt in classes:
                 indices.append(idx)
-                print("add# ",indices)
+                print("add# ", indices)
     except:
         # SVHN
         print("except!!! ", len(dataset))
-        print("dataset:",dataset)
-        print("enumerate(dataset)/;",enumerate(dataset))
+        print("dataset:", dataset)
+        print("enumerate(dataset)/;", enumerate(dataset))
         for idx, (_, tgt) in enumerate(dataset):
             if tgt in classes:
                 indices.append(idx)
-                print("addd~~",indices)
+                print("addd~~", indices)
 
     # print("given dataset before subset:", len(dataset))
     # print("indices:", indices)
