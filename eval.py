@@ -1,3 +1,5 @@
+import logging
+
 from common.eval import *
 
 model.eval()
@@ -26,7 +28,9 @@ elif P.mode in ['ood', 'ood_pre']:
         from evals.ood_pre_3 import eval_ood_detection as eval_ood_detection_3
     print(P)
     with torch.no_grad():
-        print("---------------------------------------------------------------*-*-*-*-*-*-*-*-*")
+        print("evallllllllllllllllllllllllllll///////////////////////////////////")
+        logging.debug("This is a debug message")
+        logging.debug("modelllllllll",model)
         print("modellllllllllllllll", model)
         print("test_loader", test_loader)
         print(" ood_test_loader", ood_test_loader)
