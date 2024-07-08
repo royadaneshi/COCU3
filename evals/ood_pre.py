@@ -1,3 +1,4 @@
+import logging
 import os
 from copy import deepcopy
 
@@ -180,7 +181,7 @@ def _get_features(P, model, loader, interp=False, imagenet=False, simclr_aug=Non
             x = torch.cat(x[0], dim=0)  # augmented list of x
 
         x = x.to(device)  # gpu tensor
-        print("layersssssssssssss:",layers)
+        logging.info("layersssssssssssss:",layers)
         # compute features in one batch
         feats_batch = {layer: [] for layer in layers}  # initialize: empty list
         for seed in range(sample_num):
@@ -206,7 +207,7 @@ def _get_features(P, model, loader, interp=False, imagenet=False, simclr_aug=Non
                     feats_batch[layer] += [feats]  # (B, d) cpu tensor
 
         # concatenate features in one batch
-        print("feats_alllllllllll:",feats_all)
+        logging.info("feats_alllllllllll:",feats_all)
         for key, val in feats_batch.items():
             if imagenet:
                 feats_batch[key] = torch.stack(val, dim=0)  # (B, T, d)

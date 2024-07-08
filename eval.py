@@ -29,8 +29,6 @@ elif P.mode in ['ood', 'ood_pre']:
     print(P)
     with torch.no_grad():
         logging.info("evallllllllllllllllllllllllllll///////////////////////////////////")
-        logging.info("modelllllllll",model)
-        logging.info("modellllllllllllllll", model)
         logging.info("test_loader", test_loader)
         logging.info(" ood_test_loader", ood_test_loader)
         logging.info(" P.ood_score",  P.ood_score)
