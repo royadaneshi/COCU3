@@ -29,11 +29,11 @@ elif P.mode in ['ood', 'ood_pre']:
     print(P)
     with torch.no_grad():
         logging.info("evallllllllllllllllllllllllllll///////////////////////////////////")
-        logging.info("test_loader", test_loader)
-        logging.info(" ood_test_loader", ood_test_loader)
-        logging.info(" P.ood_score",  P.ood_score)
-        logging.info("train_loader",  train_loader)
-        logging.info(" simclr_aug",  simclr_aug)
+        logging.info("test_loader%s", test_loader)
+        logging.info(" ood_test_loader%s", ood_test_loader)
+        logging.info(" P.ood_score%s",  P.ood_score)
+        logging.info("train_loader%s",  train_loader)
+        logging.info(" simclr_aug%s",  simclr_aug)
         logging.info("----///////////////////////////////////////////////////---------------------------------------*-*-*-*-*-*-*-*-*")
 
         auroc_dict = eval_ood_detection(P, model, test_loader, ood_test_loader, P.ood_score,
