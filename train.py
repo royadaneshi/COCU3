@@ -75,13 +75,13 @@ for epoch in range(start_epoch, P.epochs + 1):
             "--noist_probability", str(0.0),
             '--activation_function', str(P.activation_function)
         ]
-        print("---------------------------------------------------------------*-*-*-*-*-*-*-*-*")
-        print("P.datasetttttt", P.dataset)
-        print("P.model", P.model)
-        print("P.load_path", P.load_path)
-        print(" P.normal_labels", P.normal_labels)
-
-        print("----///////////////////////////////////////////////////---------------------------------------*-*-*-*-*-*-*-*-*")
+        # print("---------------------------------------------------------------*-*-*-*-*-*-*-*-*")
+        # print("P.datasetttttt", P.dataset)
+        # print("P.model", P.model)
+        # print("P.load_path", P.load_path)
+        # print(" P.normal_labels", P.normal_labels)
+        #
+        # print("----///////////////////////////////////////////////////---------------------------------------*-*-*-*-*-*-*-*-*")
 
         result = subprocess.run(["python", "eval.py"] + arguments_to_pass, capture_output=True, text=True)
 

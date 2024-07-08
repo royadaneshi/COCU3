@@ -28,19 +28,15 @@ elif P.mode in ['ood', 'ood_pre']:
         from evals.ood_pre_3 import eval_ood_detection as eval_ood_detection_3
     print(P)
     with torch.no_grad():
-        print("evallllllllllllllllllllllllllll///////////////////////////////////")
-        logging.debug("This is a debug message")
+        logging.info("evallllllllllllllllllllllllllll///////////////////////////////////")
         logging.info("modelllllllll",model)
-        logging.warning("This is a warning message")
-        logging.error("This is an error message")
-        logging.critical("This is a critical message")
-        print("modellllllllllllllll", model)
-        print("test_loader", test_loader)
-        print(" ood_test_loader", ood_test_loader)
-        print(" P.ood_score",  P.ood_score)
-        print("train_loader",  train_loader)
-        print(" simclr_aug",  simclr_aug)
-        print("----///////////////////////////////////////////////////---------------------------------------*-*-*-*-*-*-*-*-*")
+        logging.info("modellllllllllllllll", model)
+        logging.info("test_loader", test_loader)
+        logging.info(" ood_test_loader", ood_test_loader)
+        logging.info(" P.ood_score",  P.ood_score)
+        logging.info("train_loader",  train_loader)
+        logging.info(" simclr_aug",  simclr_aug)
+        logging.info("----///////////////////////////////////////////////////---------------------------------------*-*-*-*-*-*-*-*-*")
 
         auroc_dict = eval_ood_detection(P, model, test_loader, ood_test_loader, P.ood_score,
                                         train_loader=train_loader, simclr_aug=simclr_aug)
