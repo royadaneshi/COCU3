@@ -28,13 +28,13 @@ elif P.mode in ['ood', 'ood_pre']:
         from evals.ood_pre_3 import eval_ood_detection as eval_ood_detection_3
     print(P)
     with torch.no_grad():
-        logging.debug("evallllllllllllllllllllllllllll///////////////////////////////////")
-        logging.debug("test_loader%s", test_loader)
-        logging.debug(" ood_test_loader%s", ood_test_loader)
-        logging.debug(" P.ood_score%s",  P.ood_score)
-        logging.debug("train_loader%s",  train_loader)
-        logging.debug(" simclr_aug%s",  simclr_aug)
-        logging.debug("----///////////////////////////////////////////////////---------------------------------------*-*-*-*-*-*-*-*-*")
+        logging.info("evallllllllllllllllllllllllllll///////////////////////////////////")
+        logging.info("test_loader", test_loader)
+        logging.info(" ood_test_loader", ood_test_loader)
+        logging.info(" P.ood_score",  P.ood_score)
+        logging.info("train_loader",  train_loader)
+        logging.info(" simclr_aug",  simclr_aug)
+        logging.info("----///////////////////////////////////////////////////---------------------------------------*-*-*-*-*-*-*-*-*")
 
         auroc_dict = eval_ood_detection(P, model, test_loader, ood_test_loader, P.ood_score,
                                         train_loader=train_loader, simclr_aug=simclr_aug)

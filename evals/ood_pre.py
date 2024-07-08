@@ -171,8 +171,8 @@ def _get_features(P, model, loader, interp=False, imagenet=False, simclr_aug=Non
     # compute features in full dataset
     model.eval()
     feats_all = {layer: [] for layer in layers}  # initialize: empty list
-    logging.debug("layersssssssssssss:%s", layers)
-    logging.debug("feats_all:%s", feats_all)
+    logging.info("layersssssssssssss:", layers)
+    logging.info("feats_all:", feats_all)
 
     for i, (x, _) in enumerate(loader):
         if interp:
@@ -217,10 +217,10 @@ def _get_features(P, model, loader, interp=False, imagenet=False, simclr_aug=Non
 
         # add features in full dataset
         for layer in layers:
-            logging.debug("feats_all[layer]beforeeeeeeeeee:%s", feats_all[layer])
+            logging.debug("feats_all[layer]beforeeeeeeeeee:", feats_all[layer])
 
             feats_all[layer] += [feats_batch[layer]]
-            logging.debug("feats_all[layer]afterrrrrrrrrrrr:%s", feats_all[layer])
+            logging.debug("feats_all[layer]afterrrrrrrrrrrr", feats_all[layer])
 
 
     # concatenate features in full dataset
