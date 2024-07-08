@@ -171,6 +171,9 @@ def _get_features(P, model, loader, interp=False, imagenet=False, simclr_aug=Non
     # compute features in full dataset
     model.eval()
     feats_all = {layer: [] for layer in layers}  # initialize: empty list
+    logging.info("layersssssssssssss:%s", layers)
+    logging.info("feats_all:%s", feats_all)
+
     for i, (x, _) in enumerate(loader):
         if interp:
             x_interp = (x + last) / 2 if i > 0 else x  # omit the first batch, assume batch sizes are equal
@@ -181,7 +184,6 @@ def _get_features(P, model, loader, interp=False, imagenet=False, simclr_aug=Non
             x = torch.cat(x[0], dim=0)  # augmented list of x
 
         x = x.to(device)  # gpu tensor
-        logging.info("layersssssssssssss:%s",layers)
         # compute features in one batch
         feats_batch = {layer: [] for layer in layers}  # initialize: empty list
         for seed in range(sample_num):
