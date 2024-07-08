@@ -748,7 +748,7 @@ class TumorDetection(torch.utils.data.Dataset):
 
         if self.transform:
             image = self.transform(image)
-
+        print("image_file:",image_file,"  if resulttttttttttttttttttttttttt:","normal" in os.path.dirname(image_file))
         if "normal" in os.path.dirname(image_file):
             target = 0
         else:
