@@ -610,35 +610,35 @@ def get_dataset(P, dataset, test_only=False, image_size=(32, 32, 3), download=Fa
         ])
         if train_transform_cutpasted:
             train_set = TumorDetection(transform=train_transform_cutpasted, train=True)
-            train_set2 = TumorDetection2(transform=train_transform_cutpasted, train=True)
-            print("here1 tumor:", train_set2.shape(), train_set2.type())
-            print("here1 chest :", train_set.shape(), train_set.type())
+            # train_set2 = TumorDetection2(transform=train_transform_cutpasted, train=True)
+            # print("here1 tumor:", train_set2.shape(), train_set2.type())
+            # print("here1 chest :", train_set.shape(), train_set.type())
         else:
             train_set = TumorDetection(transform=transform, train=True)
-            train_set2 = TumorDetection2(transform=transform, train=True)
+            # train_set2 = TumorDetection2(transform=transform, train=True)
             #############################33333
-            dataset_length2 = len(train_set2)
-            sample_image2, _ = train_set2[0]
-            sample_image_shape2 = sample_image2.size  # This is (256, 256)
-            print("here2 tumor: dataset_length2", dataset_length2, " shape", sample_image_shape2)
-            dataset_length = len(train_set)
-            sample_image, _ = train_set[0]
-            sample_image_shape = sample_image.size  # This is (256, 256)
-            print("here2 chest: length", dataset_length, " shape:", sample_image_shape)
+            # dataset_length2 = len(train_set2)
+            # sample_image2, _ = train_set2[0]
+            # sample_image_shape2 = sample_image2.size  # This is (256, 256)
+            # print("here2 tumor: dataset_length2", dataset_length2, " shape", sample_image_shape2)
+            # dataset_length = len(train_set)
+            # sample_image, _ = train_set[0]
+            # sample_image_shape = sample_image.size  # This is (256, 256)
+            # print("here2 chest: length", dataset_length, " shape:", sample_image_shape)
             #######################################################
 
         test_set = TumorDetection(transform=transform, train=False)
-        test_set2 = TumorDetection2(transform=transform, train=False)
-        #######################33333
-        dataset_length2 = len(test_set2)
-        sample_image2, _ = test_set2[0]
-        sample_image_shape2 = sample_image2.size  # This is (256, 256)
-        print("here3 tumor: dataset_length2", dataset_length2, " shape", sample_image_shape2)
-        dataset_length = len(test_set)
-        sample_image, _ = test_set[0]
-        sample_image_shape = sample_image.size  # This is (256, 256)
-        print("here3 chest: length", dataset_length, " shape:", sample_image_shape)
-        #######################################################
+        # test_set2 = TumorDetection2(transform=transform, train=False)
+        # #######################33333
+        # dataset_length2 = len(test_set2)
+        # sample_image2, _ = test_set2[0]
+        # sample_image_shape2 = sample_image2.size  # This is (256, 256)
+        # print("here3 tumor: dataset_length2", dataset_length2, " shape", sample_image_shape2)
+        # dataset_length = len(test_set)
+        # sample_image, _ = test_set[0]
+        # sample_image_shape = sample_image.size  # This is (256, 256)
+        # print("here3 chest: length", dataset_length, " shape:", sample_image_shape)
+        # #######################################################
 
         print("train_set shapes: ", train_set[0][0].shape)
         print("test_set shapes: ", test_set[0][0].shape)
@@ -1179,19 +1179,19 @@ def get_dataset(P, dataset, test_only=False, image_size=(32, 32, 3), download=Fa
             ])
             tumor_detc_train_set = TumorDetection(transform=train_transform_cutpasted, train=True,
                                                   count=tumor_detection_cnt)
-            tumor_detc_train_set2 = TumorDetection2(transform=train_transform_cutpasted, train=True,
-                                                    count=tumor_detection_cnt)
-            print("here4 tumor:", tumor_detc_train_set2.shape(), tumor_detc_train_set2.type())
-            print("here4 chest :", tumor_detc_train_set.shape(), tumor_detc_train_set.type())
+            # tumor_detc_train_set2 = TumorDetection2(transform=train_transform_cutpasted, train=True,
+            #                                         count=tumor_detection_cnt)
+            # print("here4 tumor:", tumor_detc_train_set2.shape(), tumor_detc_train_set2.type())
+            # print("here4 chest :", tumor_detc_train_set.shape(), tumor_detc_train_set.type())
         else:
             tumor_detc_train_set = TumorDetection(transform=transform, train=True, count=tumor_detection_cnt)
-            tumor_detc_train_set2 = TumorDetection2(transform=transform, train=True, count=tumor_detection_cnt)
-            print("here5 tumor:", tumor_detc_train_set2.shape(), tumor_detc_train_set2.type())
-            print("here5 chest :", tumor_detc_train_set.shape(), tumor_detc_train_set.type())
+            # tumor_detc_train_set2 = TumorDetection2(transform=transform, train=True, count=tumor_detection_cnt)
+            # print("here5 tumor:", tumor_detc_train_set2.shape(), tumor_detc_train_set2.type())
+            # print("here5 chest :", tumor_detc_train_set.shape(), tumor_detc_train_set.type())
         tumor_detc_test_set = TumorDetection(transform=transform, train=False)
-        tumor_detc_test_set2 = TumorDetection2(transform=transform, train=False)
-        print("here6 tumor:", tumor_detc_test_set2.shape(), tumor_detc_test_set2.type())
-        print("here6 chest :", tumor_detc_test_set.shape(), tumor_detc_test_set.type())
+        # tumor_detc_test_set2 = TumorDetection2(transform=transform, train=False)
+        # print("here6 tumor:", tumor_detc_test_set2.shape(), tumor_detc_test_set2.type())
+        # print("here6 chest :", tumor_detc_test_set.shape(), tumor_detc_test_set.type())
 
         normal_files = sorted(glob('./brain_tumor_dataset/no/*'))
         test_normal = normal_files[:25]
