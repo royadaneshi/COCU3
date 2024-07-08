@@ -4,23 +4,37 @@ model.eval()
 print(P)
 if P.mode == 'test_acc':
     from evals import test_classifier
+
     with torch.no_grad():
         error = test_classifier(P, model, test_loader, 0, logger=None)
 
 elif P.mode == 'test_marginalized_acc':
     from evals import test_classifier
+
     with torch.no_grad():
         error = test_classifier(P, model, test_loader, 0, marginal=True, logger=None)
 
 elif P.mode in ['ood', 'ood_pre']:
     if P.mode == 'ood':
         from evals import eval_ood_detection
+
+        print("ooddddddddddddddd")
     else:
+        print("not oodddddddddddddddd")
         from evals.ood_pre import eval_ood_detection
         from evals.ood_pre_2 import eval_ood_detection as eval_ood_detection_2
         from evals.ood_pre_3 import eval_ood_detection as eval_ood_detection_3
     print(P)
     with torch.no_grad():
+        print("---------------------------------------------------------------*-*-*-*-*-*-*-*-*")
+        print("modellllllllllllllll", model)
+        print("test_loader", test_loader)
+        print(" ood_test_loader", ood_test_loader)
+        print(" P.ood_score",  P.ood_score)
+        print("train_loader",  train_loader)
+        print(" simclr_aug",  simclr_aug)
+        print("----///////////////////////////////////////////////////---------------------------------------*-*-*-*-*-*-*-*-*")
+
         auroc_dict = eval_ood_detection(P, model, test_loader, ood_test_loader, P.ood_score,
                                         train_loader=train_loader, simclr_aug=simclr_aug)
 
@@ -49,11 +63,10 @@ elif P.mode in ['ood', 'ood_pre']:
     bests = map('{:.4f}'.format, bests)
     print('\t'.join(bests))
 
-
     if P.print_3_score:
         with torch.no_grad():
             auroc_dict = eval_ood_detection_2(P, model, test_loader, ood_test_loader, P.ood_score,
-                                            train_loader=train_loader, simclr_aug=simclr_aug)
+                                              train_loader=train_loader, simclr_aug=simclr_aug)
 
         if P.one_class_idx is not None:
             mean_dict = dict()
@@ -80,11 +93,9 @@ elif P.mode in ['ood', 'ood_pre']:
         bests = map('{:.4f}'.format, bests)
         print('\t'.join(bests))
 
-
-        
         with torch.no_grad():
             auroc_dict = eval_ood_detection_3(P, model, test_loader, ood_test_loader, P.ood_score,
-                                            train_loader=train_loader, simclr_aug=simclr_aug)
+                                              train_loader=train_loader, simclr_aug=simclr_aug)
 
         if P.one_class_idx is not None:
             mean_dict = dict()
@@ -110,9 +121,7 @@ elif P.mode in ['ood', 'ood_pre']:
 
         bests = map('{:.4f}'.format, bests)
         print('\t'.join(bests))
-    
+
 
 else:
     raise NotImplementedError()
-
-
