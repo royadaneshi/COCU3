@@ -217,7 +217,11 @@ def _get_features(P, model, loader, interp=False, imagenet=False, simclr_aug=Non
 
         # add features in full dataset
         for layer in layers:
+            logging.info("feats_all[layer]beforeeeeeeeeee:%s", feats_all[layer])
+
             feats_all[layer] += [feats_batch[layer]]
+            logging.info("feats_all[layer]afterrrrrrrrrrrr:%s", feats_all[layer])
+
 
     # concatenate features in full dataset
     logging.info("feats_alllllllllll:%s", feats_all)
