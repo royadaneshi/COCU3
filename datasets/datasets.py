@@ -1585,22 +1585,15 @@ def get_subclass_dataset(P, dataset, classes, count=-1):
 
     indices = []
     try:
-        print("try!!! ", len(dataset.targets))
         for idx, tgt in enumerate(dataset.targets):
             if tgt in classes:
                 indices.append(idx)
-                print("add# ", indices)
     except:
         # SVHN
         for idx, (_, tgt) in enumerate(dataset):
-            # print("@@",tgt)
-            # print("class",classes)
             if tgt in classes:
                 indices.append(idx)
-                print("addd~~", indices)
 
-    # print("given dataset before subset:", len(dataset))
-    # print("indices:", indices)
     dataset = Subset(dataset, indices)
     # print("given dataset after subset ! :", len(dataset))
 
