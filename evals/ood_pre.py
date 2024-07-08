@@ -228,7 +228,6 @@ def _get_features(P, model, loader, interp=False, imagenet=False, simclr_aug=Non
 
     for key, val in feats_all.items():
         feats_all[key] = torch.cat(val, dim=0)  # (N, T, d)
-
     # reshape order
     if imagenet is False:
         # Convert [1,2,3,4, 1,2,3,4] -> [1,1, 2,2, 3,3, 4,4]

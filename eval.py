@@ -20,21 +20,21 @@ elif P.mode in ['ood', 'ood_pre']:
     if P.mode == 'ood':
         from evals import eval_ood_detection
 
-        print("ooddddddddddddddd")
+        logging.info("ooddddddddddddddd")
     else:
-        print("not oodddddddddddddddd")
+        logging.info("not oodddddddddddddddd")
         from evals.ood_pre import eval_ood_detection
         from evals.ood_pre_2 import eval_ood_detection as eval_ood_detection_2
         from evals.ood_pre_3 import eval_ood_detection as eval_ood_detection_3
     print(P)
     with torch.no_grad():
-        logging.info("evallllllllllllllllllllllllllll///////////////////////////////////")
-        logging.info("test_loader", test_loader)
-        logging.info(" ood_test_loader", ood_test_loader)
-        logging.info(" P.ood_score",  P.ood_score)
-        logging.info("train_loader",  train_loader)
-        logging.info(" simclr_aug",  simclr_aug)
-        logging.info("----///////////////////////////////////////////////////---------------------------------------*-*-*-*-*-*-*-*-*")
+        # logging.info("evallllllllllllllllllllllllllll///////////////////////////////////")
+        # logging.info("test_loader", test_loader)
+        # logging.info(" ood_test_loader", ood_test_loader)
+        # logging.info(" P.ood_score",  P.ood_score)
+        # logging.info("train_loader",  train_loader)
+        # logging.info(" simclr_aug",  simclr_aug)
+        # logging.info("----///////////////////////////////////////////////////---------------------------------------*-*-*-*-*-*-*-*-*")
 
         auroc_dict = eval_ood_detection(P, model, test_loader, ood_test_loader, P.ood_score,
                                         train_loader=train_loader, simclr_aug=simclr_aug)
