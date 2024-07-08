@@ -1556,15 +1556,17 @@ def get_subclass_dataset(P, dataset, classes, count=-1):
     except:
         # SVHN
         print("except!!! ", len(dataset))
+        print("dataset:",dataset)
+        print("enumerate(dataset)/;",enumerate(dataset))
         for idx, (_, tgt) in enumerate(dataset):
             if tgt in classes:
                 indices.append(idx)
                 print("addd~~",indices)
 
-    print("given dataset before subset:", len(dataset))
-    print("indices:", indices)
+    # print("given dataset before subset:", len(dataset))
+    # print("indices:", indices)
     dataset = Subset(dataset, indices)
-    print("given dataset after subset ! :", len(dataset))
+    # print("given dataset after subset ! :", len(dataset))
 
     if count == -1:
         pass
