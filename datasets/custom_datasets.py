@@ -749,7 +749,6 @@ class TumorDetection(torch.utils.data.Dataset):
         if self.transform:
             image = self.transform(image)
         if "normal" in image_file:
-            print("0")
             target = 0
         else:
             target = 1
