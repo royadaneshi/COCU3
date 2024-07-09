@@ -595,9 +595,10 @@ class UCSDDataset(Dataset):
     def __len__(self):
         return len(self.images_dir)
 
+
 #############################
 
-class TumorDetection(torch.utils.data.Dataset):
+class TumorDetection2(torch.utils.data.Dataset):
     def __init__(self, transform=None, train=True, count=None):
         self._download_and_extract()
         self.transform = transform
@@ -677,20 +678,17 @@ class TumorDetection(torch.utils.data.Dataset):
 
 
 ###############################3
-class TumorDetection2(torch.utils.data.Dataset):
+class TumorDetection(torch.utils.data.Dataset):
     def __init__(self, transform=None, train=True, count=None):
         self._download_and_extract()
         self.transform = transform
         if train:
-            # self.image_files = glob(os.path.join('./MRI', "Training", "notumor", "*.jpg"))
             self.image_files = glob(
                 os.path.join("/kaggle/input/d/hosseinmirzayee/chest-datasett256/chest_dataset/train", "*.png"))
 
         else:
-            # image_files = glob(os.path.join('./MRI', "Testing", "*", "*.jpg"))
             image_files = glob(
                 os.path.join("/kaggle/input/d/hosseinmirzayee/chest-datasett256/chest_dataset/test", "*.png"))
-            # normal_image_files = glob(os.path.join('./MRI', "./Testing", "notumor", "*.jpg"))
             normal_image_files = glob(
                 os.path.join("/kaggle/input/d/hosseinmirzayee/chest-datasett256/chest_dataset/test", "*.png"))
             anomaly_image_files = list(set(image_files) - set(normal_image_files))
@@ -706,37 +704,27 @@ class TumorDetection2(torch.utils.data.Dataset):
 
     def _download_and_extract(self):
         google_id = '1AOPOfQ05aSrr2RkILipGmEkgLDrZCKz_'
-        # file_path = os.path.join('./MRI', 'Training')
         file_path = os.path.join('./chest', 'Training')
 
         if os.path.exists(file_path):
             return
 
-        # if not os.path.exists('./MRI'):
-        # os.makedirs('./MRI')
-
         if not os.path.exists('./chest'):
             os.makedirs('./chest')
-
-        # if not os.path.exists(file_path):
-        #     subprocess.run(['gdown', google_id, '-O', './MRI/archive(3).zip'])
-        #
-        # with zipfile.ZipFile("./MRI/archive(3).zip", 'r') as zip_ref:
-        #     zip_ref.extractall("./MRI/")
-        #
-        # os.rename("./MRI/Training/glioma", "./MRI/Training/glioma_tr")
-        # os.rename("./MRI/Training/meningioma", "./MRI/Training/meningioma_tr")
-        # os.rename("./MRI/Training/pituitary", "./MRI/Training/pituitary_tr")
-        #
-        # shutil.move("./MRI/Training/glioma_tr", "./MRI/Testing")
-        # shutil.move("./MRI/Training/meningioma_tr", "./MRI/Testing")
-        # shutil.move("./MRI/Training/pituitary_tr", "./MRI/Testing")
 
         if not os.path.exists(file_path):
             subprocess.run(['gdown', google_id, '-O', './chest/archive(3).zip'])
 
         with zipfile.ZipFile("./chest/archive(3).zip", 'r') as zip_ref:
             zip_ref.extractall("./chest/")
+
+        os.rename("./chest/Training/glioma", "./chest/Training/glioma_tr")
+        os.rename("./chest/Training/meningioma", "./chest/Training/meningioma_tr")
+        os.rename("./chest/Training/pituitary", "./chest/Training/pituitary_tr")
+
+        shutil.move("./chest/Training/glioma_tr", "./chest/Testing")
+        shutil.move("./chest/Training/meningioma_tr", "./chest/Testing")
+        shutil.move("./chest/Training/pituitary_tr", "./chest/Testing")
 
     def __getitem__(self, index):
         image_file = self.image_files[index]
