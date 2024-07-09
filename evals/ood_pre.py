@@ -223,10 +223,17 @@ def _get_features(P, model, loader, interp=False, imagenet=False, simclr_aug=Non
     if imagenet is False:
         # Convert [1,2,3,4, 1,2,3,4] -> [1,1, 2,2, 3,3, 4,4]
         for key, val in feats_all.items():
+            #########added
+            if not isinstance(val, torch.Tensor):
+                val = torch.tensor(val)
+            ###########33
             N, T, d = val.size()  # T = K * T'
             val = val.view(N, -1, P.K_shift, d)  # (N, T', K, d)
             val = val.transpose(2, 1)  # (N, 4, T', d)
             val = val.reshape(N, T, d)  # (N, T, d)
+            ##
+            # val = val.tolist()
+            ##
             feats_all[key] = val
 
     return feats_all
