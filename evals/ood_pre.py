@@ -233,22 +233,17 @@ def _get_features(P, model, loader, interp=False, imagenet=False, simclr_aug=Non
 
             # N, T, d = val.size()  # T = K * T'
             if flag:
-                N = val.shape
-                val = val.view(N, -1, P.K_shift, 0)  # (N, T', K, d)
-                val = val.transpose(1, 0)  # (N, 4, T', d)
-                ##
-                # val = val.tolist()
-                ##
-                feats_all[key] = val
-            else:
-                N, T, d = val.shape  # T = K * T'
-                val = val.view(N, -1, P.K_shift, d)  # (N, T', K, d)
-                val = val.transpose(2, 1)  # (N, 4, T', d)
-                val = val.reshape(N, T, d)  # (N, T, d)
-                ##
-                # val = val.tolist()
-                ##
-                feats_all[key] = val
+                val = val.unsqueeze(0)
+                val = val.unsqueeze(0)
+
+            N, T, d = val.shape  # T = K * T'
+            val = val.view(N, -1, P.K_shift, d)  # (N, T', K, d)
+            val = val.transpose(2, 1)  # (N, 4, T', d)
+            val = val.reshape(N, T, d)  # (N, T, d)
+            ##
+            # val = val.tolist()
+            ##
+            feats_all[key] = val
 
     return feats_all
 
