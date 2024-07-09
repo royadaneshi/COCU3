@@ -1,4 +1,3 @@
-import logging
 
 from common.eval import *
 
@@ -20,9 +19,7 @@ elif P.mode in ['ood', 'ood_pre']:
     if P.mode == 'ood':
         from evals import eval_ood_detection
 
-        logging.info("ooddddddddddddddd")
     else:
-        logging.info("not oodddddddddddddddd")
         from evals.ood_pre import eval_ood_detection
         from evals.ood_pre_2 import eval_ood_detection as eval_ood_detection_2
         from evals.ood_pre_3 import eval_ood_detection as eval_ood_detection_3

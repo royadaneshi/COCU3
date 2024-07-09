@@ -1,4 +1,3 @@
-import logging
 import os
 from copy import deepcopy
 
@@ -169,10 +168,6 @@ def _get_features(P, model, loader, interp=False, imagenet=False, simclr_aug=Non
     # compute features in full dataset
     model.eval()
     feats_all = {layer: [] for layer in layers}  # initialize: empty list
-    logging.info("layersssssssssssss:")
-    logging.info("feats_all:", feats_all)
-    logging.info(
-        "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1:")
 
     for i, (x, _) in enumerate(loader):
         if interp:
@@ -215,20 +210,13 @@ def _get_features(P, model, loader, interp=False, imagenet=False, simclr_aug=Non
             else:
                 feats_batch[key] = torch.stack(val, dim=1)  # (B, T, d)
 
-        logging.info("feats_batch:###########################", feats_batch)
         # add features in full dataset
         for layer in layers:
-            logging.info("feats_all[layer]beforeeeeeeeeee:", feats_all[layer])
-
             feats_all[layer] += [feats_batch[layer]]
-            logging.info("feats_all[layer]afterrrrrrrrrrrr", feats_all[layer])
 
     # concatenate features in full dataset
-    logging.info("feats_alllllllllll", feats_all)
 
     for key, val in feats_all.items():
-        logging.info("vallllllllllllll:", val)
-
         if len(val) != 0:
             feats_all[key] = torch.cat(val, dim=0)  # (N, T, d)
     # reshape order
