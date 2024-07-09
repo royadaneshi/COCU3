@@ -597,7 +597,7 @@ class UCSDDataset(Dataset):
 
 #############################
 
-class TumorDetection2(torch.utils.data.Dataset):
+class TumorDetection(torch.utils.data.Dataset):
     def __init__(self, transform=None, train=True, count=None):
         self._download_and_extract()
         self.transform = transform
@@ -677,7 +677,7 @@ class TumorDetection2(torch.utils.data.Dataset):
 
 
 ###############################3
-class TumorDetection(torch.utils.data.Dataset):
+class TumorDetection2(torch.utils.data.Dataset):
     def __init__(self, transform=None, train=True, count=None):
         self._download_and_extract()
         self.transform = transform
