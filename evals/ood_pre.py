@@ -233,16 +233,18 @@ def _get_features(P, model, loader, interp=False, imagenet=False, simclr_aug=Non
 
             # N, T, d = val.size()  # T = K * T'
             if flag:
-                N=1
+                N = 1
                 T = val.shape[0]
                 d = 1
                 val = val.view(N, T, 1, d)
             else:
-
                 N, T, d = val.shape  # T = K * T'
                 val = val.view(N, -1, P.K_shift, d)  # (N, T', K, d)
                 val = val.transpose(2, 1)  # (N, 4, T', d)
+
             val = val.reshape(N, T, d)  # (N, T, d)
+            if torch.isnan(val).any():
+                continue
             feats_all[key] = val
 
     return feats_all
