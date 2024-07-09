@@ -1,3 +1,4 @@
+import logging
 import os
 from copy import deepcopy
 
@@ -223,10 +224,14 @@ def _get_features(P, model, loader, interp=False, imagenet=False, simclr_aug=Non
     if imagenet is False:
         # Convert [1,2,3,4, 1,2,3,4] -> [1,1, 2,2, 3,3, 4,4]
         for key, val in feats_all.items():
+            logging.info("valllllllllllllllllll", type(val))
             #########added
             if not isinstance(val, torch.Tensor):
                 val = torch.tensor(val)
             ###########33
+            logging.info("valllllllllllllllllll_afterrrrrrrrrrr", type(val))
+            logging.info("valllllllllllllllllll_shapeeeeeeeeeeee", val.shape)
+
             # N, T, d = val.size()  # T = K * T'
             N, T, d = val.shape  # T = K * T'
             val = val.view(N, -1, P.K_shift, d)  # (N, T', K, d)
