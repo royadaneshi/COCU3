@@ -226,14 +226,20 @@ def _get_features(P, model, loader, interp=False, imagenet=False, simclr_aug=Non
         for key, val in feats_all.items():
             logging.info("valllllllllllllllllll", type(val))
             #########added
+            flag = False
             if not isinstance(val, torch.Tensor):
                 val = torch.tensor(val)
+                flag = True
             ###########33
             logging.info("valllllllllllllllllll_afterrrrrrrrrrr", type(val))
             logging.info("valllllllllllllllllll_shapeeeeeeeeeeee", val.shape)
 
             # N, T, d = val.size()  # T = K * T'
-            N, T, d = val.shape  # T = K * T'
+            if flag:
+                N = val.shape
+                T, d = 0, 0
+            else:
+                N, T, d = val.shape  # T = K * T'
             val = val.view(N, -1, P.K_shift, d)  # (N, T', K, d)
             val = val.transpose(2, 1)  # (N, 4, T', d)
             val = val.reshape(N, T, d)  # (N, T, d)
