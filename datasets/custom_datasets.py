@@ -598,9 +598,9 @@ class UCSDDataset(Dataset):
 
 #############################
 
-class TumorDetection(torch.utils.data.Dataset):
+class TumorDetection2(torch.utils.data.Dataset):
     def __init__(self, transform=None, train=True, count=None):
-        self._download_and_extract()
+        # self._download_and_extract()
         self.transform = transform
         if train:
             self.image_files = glob(
@@ -637,13 +637,13 @@ class TumorDetection(torch.utils.data.Dataset):
         with zipfile.ZipFile("./MRI/archive(3).zip", 'r') as zip_ref:
             zip_ref.extractall("./MRI/")
 
-        # os.rename("./MRI/Training/glioma", "./MRI/Training/glioma_tr")
-        # os.rename("./MRI/Training/meningioma", "./MRI/Training/meningioma_tr")
-        # os.rename("./MRI/Training/pituitary", "./MRI/Training/pituitary_tr")
-        #
-        # shutil.move("./MRI/Training/glioma_tr", "./MRI/Testing")
-        # shutil.move("./MRI/Training/meningioma_tr", "./MRI/Testing")
-        # shutil.move("./MRI/Training/pituitary_tr", "./MRI/Testing")
+        os.rename("./MRI/Training/glioma", "./MRI/Training/glioma_tr")
+        os.rename("./MRI/Training/meningioma", "./MRI/Training/meningioma_tr")
+        os.rename("./MRI/Training/pituitary", "./MRI/Training/pituitary_tr")
+
+        shutil.move("./MRI/Training/glioma_tr", "./MRI/Testing")
+        shutil.move("./MRI/Training/meningioma_tr", "./MRI/Testing")
+        shutil.move("./MRI/Training/pituitary_tr", "./MRI/Testing")
 
     def __getitem__(self, index):
         image_file = self.image_files[index]
@@ -678,9 +678,9 @@ class TumorDetection(torch.utils.data.Dataset):
 
 
 ###############################3
-class TumorDetection2(torch.utils.data.Dataset):
+class TumorDetection(torch.utils.data.Dataset):
     def __init__(self, transform=None, train=True, count=None):
-        self._download_and_extract()
+        # self._download_and_extract()
         self.transform = transform
         if train:
             self.image_files = glob(
