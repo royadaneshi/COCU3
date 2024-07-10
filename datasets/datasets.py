@@ -605,7 +605,7 @@ def get_dataset(P, dataset, test_only=False, image_size=(32, 32, 3), download=Fa
     elif dataset == 'Tomor_Detection':
         n_classes = 2
         ###added
-        image_size = (256, 256, 3)
+        # image_size = (256, 256, 3)
         ##
         transform = transforms.Compose([
             transforms.Resize((image_size[0], image_size[1])),
