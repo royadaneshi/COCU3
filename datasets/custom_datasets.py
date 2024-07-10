@@ -684,13 +684,13 @@ class TumorDetection(torch.utils.data.Dataset):
         self.transform = transform
         if train:
             self.image_files = glob(
-                os.path.join("/kaggle/input/d/hosseinmirzayee/chest-datasett256/chest_dataset/train", "*.png"))
+                os.path.join("/kaggle/input/more-chest/chest_more_images/train", "*.png"))
 
         else:
             image_files = glob(
-                os.path.join("/kaggle/input/d/hosseinmirzayee/chest-datasett256/chest_dataset/test", "*.png"))
+                os.path.join("/kaggle/input/more-chest/chest_more_images/test", "*.png"))
             normal_image_files = glob(
-                os.path.join("/kaggle/input/d/hosseinmirzayee/chest-datasett256/chest_dataset/test", "*.png"))
+                os.path.join("/kaggle/input/more-chest/chest_more_images/test", "*.png"))
             anomaly_image_files = list(set(image_files) - set(normal_image_files))
             self.image_files = image_files
 
