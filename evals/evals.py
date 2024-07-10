@@ -146,9 +146,9 @@ def get_auroc(scores_id, scores_ood):
     scores = np.concatenate([scores_id, scores_ood])
     labels = np.concatenate([np.ones_like(scores_id), np.zeros_like(scores_ood)])
     ###added
-    nan_mask = ~np.isnan(scores)
-    scores = scores[nan_mask]
-    labels = labels[nan_mask]
+    # nan_mask = ~np.isnan(scores)
+    # scores = scores[nan_mask]
+    # labels = labels[nan_mask]
     ####
     return roc_auc_score(labels, scores)
 
