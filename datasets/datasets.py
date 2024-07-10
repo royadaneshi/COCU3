@@ -606,7 +606,9 @@ def get_dataset(P, dataset, test_only=False, image_size=(32, 32, 3), download=Fa
         n_classes = 2
         ###added
         # image_size = (256, 256, 3)
+        print(image_size[0],"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1")
         ##
+
         transform = transforms.Compose([
             transforms.Resize((image_size[0], image_size[1])),
             transforms.ToTensor(),
