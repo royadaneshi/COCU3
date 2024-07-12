@@ -734,11 +734,12 @@ class TumorDetection(torch.utils.data.Dataset):
 
         if self.transform:
             image = self.transform(image)
+        print("#################",image_file)
         if "normal" in image_file:
             target = 0
         else:
             target = 1
-
+        print("tagettttttt:",target)
         return image, target
 
     def __len__(self):
