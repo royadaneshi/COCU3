@@ -83,6 +83,12 @@ def eval_ood_detection(P, model, id_loader, ood_loaders, ood_scores, train_loade
 
     print(f'Compute OOD scores... (score: {ood_score})')
     scores_id = get_scores(P, feats_id, ood_score).numpy()
+    ##added
+    is_nan = np.any(np.isnan(feats_id))
+    logging.info("!@@@@@is_nan", is_nan)
+    is_nan_scores_id = np.any(np.isnan(scores_id))
+    logging.info("@@@@@!is_nan", is_nan_scores_id)
+    ####
     scores_ood = dict()
     if P.one_class_idx is not None:
         one_class_score = []
