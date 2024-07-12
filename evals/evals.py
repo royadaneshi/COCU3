@@ -117,6 +117,7 @@ def eval_ood_detection(P, model, id_loader, ood_loaders, ood_scores, train_loade
 def get_ood_score_func(P, model, ood_score, simclr_aug=None):
     def score_func(x):
         return compute_ood_score(P, model, ood_score, x, simclr_aug=simclr_aug)
+
     return score_func
 
 
@@ -155,6 +156,8 @@ def get_auroc(scores_id, scores_ood):
         labels_repeated = np.tile(labels, num_records_needed // len(labels) + 1)
         scores = np.concatenate([scores, scores_repeated[:num_records_needed]])
         labels = np.concatenate([labels, labels_repeated[:num_records_needed]])
+    unique = np.unique(labels)
+    print("!!!!!!!1", unique)
     ####
     return roc_auc_score(labels, scores)
 

@@ -738,7 +738,7 @@ class TumorDetection(torch.utils.data.Dataset):
             target = 1
         else:
             target = 0
-        # print("tagettttttt:",target)
+        print("tagettttttt:",target)
         return image, target
 
     def __len__(self):
