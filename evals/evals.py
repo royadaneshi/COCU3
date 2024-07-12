@@ -156,6 +156,9 @@ def get_auroc(scores_id, scores_ood):
     labels = np.concatenate([np.ones_like(scores_id), np.zeros_like(scores_ood)])
     ###added
     nan_mask = ~np.isnan(scores)
+    nan = np.isnan(scores)
+    na_labels = labels[nan]
+    print("!!!!!!!!!!!!!!!~~~~~~~~", np.unique(na_labels))
     scores = scores[nan_mask]
     labels = labels[nan_mask]
     num_records_needed = len(scores_id) + len(scores_ood) - len(scores)
