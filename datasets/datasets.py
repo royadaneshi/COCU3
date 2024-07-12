@@ -1,3 +1,4 @@
+import logging
 import os
 
 import numpy as np
@@ -1190,9 +1191,10 @@ def get_dataset(P, dataset, test_only=False, image_size=(32, 32, 3), download=Fa
             # print("here5 tumor:", tumor_detc_train_set2.shape(), tumor_detc_train_set2.type())
             # print("here5 chest :", tumor_detc_train_set.shape(), tumor_detc_train_set.type())
         tumor_detc_test_set = TumorDetection(transform=transform, train=False)
-        # tumor_detc_test_set2 = TumorDetection2(transform=transform, train=False)
-        # print("here6 tumor:", tumor_detc_test_set2.shape(), tumor_detc_test_set2.type())
-        # print("here6 chest :", tumor_detc_test_set.shape(), tumor_detc_test_set.type())
+        ###added
+        is_nan_scores_id = np.any(np.isnan(tumor_detc_test_set))
+        logging.info("**********tumor_detc_test_set", is_nan_scores_id)
+        #####
 
         normal_files = sorted(glob('./brain_tumor_dataset/no/*'))
         test_normal = normal_files[:25]
