@@ -692,14 +692,12 @@ class TumorDetection(torch.utils.data.Dataset):
                 os.path.join("/kaggle/input/more-chest/chest_more_images/test", "*.png"))
             anomaly_image_files = list(set(image_files) - set(normal_image_files))
             self.image_files = image_files
-        print("!!!!!!!before oversample", np.unique(target))
         if count is not None:
             if count > len(self.image_files):
                 self.image_files = self._oversample(count)
             else:
                 self.image_files = self._undersample(count)
         self.image_files.sort(key=lambda y: y.lower())
-        print("!!!!!!!after oversample", np.unique(target))
         self.train = train
 
     def __getitem__(self, index):

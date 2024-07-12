@@ -1,3 +1,6 @@
+import logging
+
+import numpy as np
 
 from common.eval import *
 
@@ -32,7 +35,8 @@ elif P.mode in ['ood', 'ood_pre']:
         # logging.info("train_loader",  train_loader)
         # logging.info(" simclr_aug",  simclr_aug)
         # logging.info("----///////////////////////////////////////////////////---------------------------------------*-*-*-*-*-*-*-*-*")
-
+        logging.info("!!!!!!!is_nan", np.any(np.isnan(test_loader)))
+        logging.info("!!!!!!!is_nan_scores_ood", np.any(np.isnan(ood_test_loader)))
         auroc_dict = eval_ood_detection(P, model, test_loader, ood_test_loader, P.ood_score,
                                         train_loader=train_loader, simclr_aug=simclr_aug)
 

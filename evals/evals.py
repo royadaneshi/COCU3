@@ -145,11 +145,18 @@ def get_scores_interp(loader, score_func):
 
 
 def get_auroc(scores_id, scores_ood):
+    ##added
+    is_nan = np.any(np.isnan(scores_id))
+    is_nan_scores_ood = np.any(np.isnan(scores_ood))
+    logging.info("!!!!!!!is_nan", is_nan)
+    logging.info("!!!!!!!is_nan_scores_ood", is_nan_scores_ood)
+
+    ######
     scores = np.concatenate([scores_id, scores_ood])
     labels = np.concatenate([np.ones_like(scores_id), np.zeros_like(scores_ood)])
     ###added
-    print("!!!!!!!before",  np.unique(labels))
-    logging.info("!!!!!!!before",  np.unique(labels))
+    print("!!!!!!!before", np.unique(labels))
+    logging.info("!!!!!!!before", np.unique(labels))
     nan_mask = ~np.isnan(scores)
     scores = scores[nan_mask]
     labels = labels[nan_mask]
