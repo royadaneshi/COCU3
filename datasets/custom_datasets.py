@@ -680,7 +680,6 @@ class TumorDetection2(torch.utils.data.Dataset):
 ###############################3
 class TumorDetection(torch.utils.data.Dataset):
     def __init__(self, transform=None, train=True, count=None):
-        # self._download_and_extract()
         self.transform = transform
         if train:
             self.image_files = glob(
@@ -693,38 +692,15 @@ class TumorDetection(torch.utils.data.Dataset):
                 os.path.join("/kaggle/input/more-chest/chest_more_images/test", "*.png"))
             anomaly_image_files = list(set(image_files) - set(normal_image_files))
             self.image_files = image_files
-
+        print("!!!!!!!before oversample", np.unique(target))
         if count is not None:
             if count > len(self.image_files):
                 self.image_files = self._oversample(count)
             else:
                 self.image_files = self._undersample(count)
         self.image_files.sort(key=lambda y: y.lower())
+        print("!!!!!!!after oversample", np.unique(target))
         self.train = train
-
-    def _download_and_extract(self):
-        google_id = '1AOPOfQ05aSrr2RkILipGmEkgLDrZCKz_'
-        file_path = os.path.join('./chest', 'Training')
-
-        if os.path.exists(file_path):
-            return
-
-        if not os.path.exists('./chest'):
-            os.makedirs('./chest')
-
-        if not os.path.exists(file_path):
-            subprocess.run(['gdown', google_id, '-O', './chest/archive(3).zip'])
-
-        with zipfile.ZipFile("./chest/archive(3).zip", 'r') as zip_ref:
-            zip_ref.extractall("./chest/")
-
-        os.rename("./chest/Training/glioma", "./chest/Training/glioma_tr")
-        os.rename("./chest/Training/meningioma", "./chest/Training/meningioma_tr")
-        os.rename("./chest/Training/pituitary", "./chest/Training/pituitary_tr")
-
-        shutil.move("./chest/Training/glioma_tr", "./chest/Testing")
-        shutil.move("./chest/Training/meningioma_tr", "./chest/Testing")
-        shutil.move("./chest/Training/pituitary_tr", "./chest/Testing")
 
     def __getitem__(self, index):
         image_file = self.image_files[index]
