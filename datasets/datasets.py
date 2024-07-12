@@ -1193,6 +1193,7 @@ def get_dataset(P, dataset, test_only=False, image_size=(32, 32, 3), download=Fa
         tumor_detc_test_set = TumorDetection(transform=transform, train=False)
         ###added
         is_nan_scores_id = np.any(np.isnan(tumor_detc_test_set))
+        print("**********tumor_detc_test_set", is_nan_scores_id)
         logging.info("**********tumor_detc_test_set", is_nan_scores_id)
         #####
 
